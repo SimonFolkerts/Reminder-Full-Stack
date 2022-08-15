@@ -100,3 +100,19 @@ Note, the configuration object contains the following properties:
     - method defines the type of request, by default it is POST
     - headers are metadata about the request. When posting we must set the content type header to inform the server about what type of data we are sending
     - body contains the payload, which is a javascript object containing the inputted data. The object is stringified into JSON format before sending
+
+## Step 5: Create a route on the back end to handle incoming POST requests
+
+Now that the fornt end can send POST requests we need to create a a new route on the back end that can accept and respond.
+
+1. Open the back end folder in VSCode and install express and cors by executing the following `npm install express cors`
+    - Express is the framework that we will use to create this RESTful API
+    - Cors is a utility that allows us to bypass Cross Origin Resource Sharing issues that result from having the front and back end on the same localhost
+
+1. We can also install nodemon as a dev dependency to conveniently hot reload the server upon changes being detected by executing `npm install --save-dev nodemon`
+
+1. Once we have these, create a new `server.js` file.
+
+1. Import express and cors and set up a new express app and listener that uses `cors()`
+
+1. Add a route that matches with POST requests to /reminders, that sends back a text response like "hello"
