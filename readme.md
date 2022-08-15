@@ -56,3 +56,19 @@ export default {
 1. Execute `npm run dev` to start the dev server up, and in your browser visit the address of the dev server to see the Vue app. It should just be an empty viewport with no errors in the console.
 
 We now have an empty but functional Vue scaffolding to work in :)
+
+## Step 3: Create front end functionality for first use case: Create Reminder
+
+We will add a form to the main component that allows the entry of the information necessary to define a reminder. This will then be submitted via an event listener to the back end. In the next step we will built a route on the back end to handle this.
+
+1. In the main App.vue component, add a `<form>` element that contains a label/input type pair for each of the data fields that a reminder have:
+    - task (`textarea`)
+    - time (`date` input)
+    - priority (`select` with values of 0, 1, 2)
+    - color (`color` input)
+
+1. Finally add a button to the form that on click runs a method called `submitForm`.
+
+1. next we must add v-model attributes to each of the inputs and connect them to data properties in the component.
+
+1. finally lets define the method `submitForm` and have it console.log a message to confirm that it works.
