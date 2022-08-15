@@ -116,3 +116,11 @@ Now that the fornt end can send POST requests we need to create a a new route on
 1. Import express and cors and set up a new express app and listener that uses `cors()`
 
 1. Add a route that matches with POST requests to /reminders, that sends back a text response like "hello"
+
+## Step 6: Create ability to interpret incoming request JSON payloads
+
+1. Add middleware that applies express.json() to incoming requests. This allows endpoints to access the JSON of requests and manipulate or otherwise work with them.
+
+1. We can then send that back down to the client.
+
+1. The client can then use response.json() instead of .text() to render the data as an actual object
