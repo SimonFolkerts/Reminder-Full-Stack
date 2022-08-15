@@ -42,8 +42,20 @@ export default {
     }
   },
   methods: {
-    submitForm() {
-      console.log("submit button pressed!")
+    async submitForm() {
+      const response = await fetch('http://127.0.0.1:3000/reminders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          task: this.task,
+          time: this.time,
+          priority: this.priority,
+          color: this.color
+        })
+      });
+
+      const data = await response.text();
+      console.log(data);
     }
   }
 }

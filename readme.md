@@ -72,3 +72,31 @@ We will add a form to the main component that allows the entry of the informatio
 1. next we must add v-model attributes to each of the inputs and connect them to data properties in the component.
 
 1. finally lets define the method `submitForm` and have it console.log a message to confirm that it works.
+
+## Step 4: Add ability to submit data to back end
+
+We will modify the method to be able to send a POST request when the form button is pressed. We will need to porvide a configuration object to the fetch method so that it isn't defaulting to GET
+
+1. Add the fetch() method to the submitForm method and supply it with a configuration object as per the code example:
+``` 
+async submitForm() {
+      const response = await fetch('http://127.0.0.1:3000/reminders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          task: this.task,
+          time: this.time,
+          priority: this.priority,
+          color: this.color
+        })
+      });
+
+      const data = await response.text();
+      console.log(data);
+    }
+```
+
+Note, the configuration object contains the following properties: 
+    - method defines the type of request, by default it is POST
+    - headers are metadata about the request. When posting we must set the content type header to inform the server about what type of data we are sending
+    - body contains the payload, which is a javascript object containing the inputted data. The object is stringified into JSON format before sending
