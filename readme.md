@@ -144,3 +144,25 @@ We need the ability to save data to a file on disk in order to permanently store
 1. Finally, we take the updated data and write it back into the file, overwriting the previous data
 
 Normally we would be using a proper database for this, however for now reading and writing JSON is simple and acceptable for this scale. The only issue is that when we write to JSON the previous data is overridden so we need to extract all of it, modify it and then save all of it each time, which would get slower the more data there is.
+
+## Step 8: Add ability to get all reminders
+
+Now that we have the ability to add reminders to the JSON file it makes sense to write the logic needed to view the reminders. We can create in the Vue app the ability to send a GET request that fetches the list of reminders.
+
+1. Add a button to the Vue application somewhere under the inputs called Get Reminders. This is a temporary implementation that will be tidied up later
+
+1. The button should have a click listener, which triggers a method called `getReminders()`
+
+1. We can use the `getReminders()` method to send a GET request to the server to retrieve the list of reminders, as per our planning document using `fetch()`
+
+1. Add a standard asynchronous `fetch()` setup that GETs to /reminders, and decodes and logs the response from JSON using `.json()`
+
+1. Now switch to the back end. We can add a new endpoint that can handle GET requests to reminders, and using logic similar to what was used for the POST endpoint, we can read and decode the data from the JSON file. In this case we do not need to modify, encode and write the data, we can simply send the data down to the client once it is decoded, as all that is required is to send the list down
+
+1. Upon clicking the button you should see that the client receives and logs the data from the server. By modifying exactly what gets sent from the server and what gets displayed on the client you can determine weather you get the whole data object in the console or just the array
+
+1. Finally we can create a data property to hold the fetched data on the Vue client. Add a data property called `reminderArray` and then put a string interpolation {{}} into the template to render it out
+
+1. Modify the `getReminders()` method so that rather than console.logging the data, it saves it to the `reminderArray` property
+
+Now the client and server are able to work together to allow the creation and viewing of reminders. This is a sensoble place to start as now we can set up a better view for the reminders using components, and we can also add validation if we like. Once we have the reminders being rendered properly we can add a button that triggers the deletion of the reminder.

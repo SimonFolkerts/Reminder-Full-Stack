@@ -28,6 +28,8 @@
       <button @click="submitForm" type="button">Create Reminder</button>
     </form>
   </div>
+  <button @click="getReminders" type="button">Get Reminders</button>
+  {{ remindersArray }}
 </template>
 
 <script>
@@ -39,6 +41,8 @@ export default {
       time: null,
       priority: 2,
       color: null,
+
+      remindersArray: [],
     }
   },
   methods: {
@@ -56,6 +60,11 @@ export default {
 
       const data = await response.json();
       console.log(data);
+    },
+    async getReminders() {
+      const response = await fetch('http://127.0.0.1:3000/reminders');
+      const data = await response.json()
+      this.remindersArray = data;
     }
   }
 }

@@ -6,6 +6,17 @@ const fs = require("fs");
 app.use(cors());
 app.use(express.json());
 
+app.get("/reminders", (req, res) => {
+  // read data
+  const rawData = fs.readFileSync("./data/data.json");
+
+  // decode data
+  const data = JSON.parse(rawData);
+
+  // send decoded data
+  res.json(data.reminders);
+});
+
 app.post("/reminders", (req, res) => {
   // read data
   const rawData = fs.readFileSync("./data/data.json");
