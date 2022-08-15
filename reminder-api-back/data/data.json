@@ -1,0 +1,28 @@
+{
+  "reminders": [
+    {
+      "task": "Write your reminder here",
+      "time": null,
+      "priority": 2,
+      "color": null
+    },
+    {
+      "task": "Write your reminder here",
+      "time": null,
+      "priority": 2,
+      "color": null
+    },
+    {
+      "task": "Write your reminder here",
+      "time": null,
+      "priority": 2,
+      "color": null
+    },
+    {
+      "task": "Write your reminder here",
+      "time": null,
+      "priority": 2,
+      "color": null
+    }
+  ]
+}

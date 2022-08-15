@@ -124,3 +124,23 @@ Now that the fornt end can send POST requests we need to create a a new route on
 1. We can then send that back down to the client.
 
 1. The client can then use response.json() instead of .text() to render the data as an actual object
+
+## Step 7: Add ability to save data
+
+We need the ability to save data to a file on disk in order to permanently store it. This can for now be achieved with a JSON file that we can read and write to using the fs module.
+
+1. Before we can use fs to read and write we must import it using `require()`.
+
+1. We also will need a JSON file with an object that has the data array as a property to keep things organised
+
+1. Once it is imported, in our POST /reminders endpoint we can read the contents of the file using `fs.readFileSync()`
+
+1. We decode from a buffer to regular javascript using the `JSON.parse()`
+
+1. Once decoded, we can append the request body to the reminders array in the JSON data object using `push()`
+
+1. Now we encode it back into JSON using `JSON.stringify()`
+
+1. Finally, we take the updated data and write it back into the file, overwriting the previous data
+
+Normally we would be using a proper database for this, however for now reading and writing JSON is simple and acceptable for this scale. The only issue is that when we write to JSON the previous data is overridden so we need to extract all of it, modify it and then save all of it each time, which would get slower the more data there is.
