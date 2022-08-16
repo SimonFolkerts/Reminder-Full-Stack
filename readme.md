@@ -178,3 +178,21 @@ Now that we are able to get a list of reminders rendered into the DOM it would m
 1. Import the component into App.vue and register and render it. When rendering it, use `v-for` to display it once for each item in the reminders array.
 
 Now when you click you then get reminders button you can see each reminder gets a component that displays its hardcorded html. In the next step we will add the ability for each component instance to display the actual data that it represents.
+
+## Step 10: Add prop pipeline between App.vue and the child components to allow passage of data
+
+We will now add the ability for the parent component to pass through to the reminder component the information in each particular reminder thorugh the use of props.
+
+1. Add a prop to the reminder component that is being list rendered using v-for. Something like `reminderData`.
+
+1. We will use `v-bind` (shorthand `:`) to allow us to insert an expression as the value for the prop. The expression we will insert is the alias for the currently iterated item in the arrray the v-for is looping through. This means that each component generated from each item in the array, will have that item passed through into the component. Because the items in the array are reminder objects, each child component will get a reminder object passed into it.
+
+1. In the child component we can then register the prop (note that Vue can convert kebab-case (the convention for writing inside html tags) to camelCase (the convention for writing in JS)).
+
+1. Once the prop is registered we can then access it as we would a data property. Since it is an object we use the member operator `.` to access its property values and express them in the template.
+
+1. We can even use v-bind in the style tag to programmatically insert a background color. (Note in this case the color is first saved into the data to prevent having to use the `.` operator in the css, which would show a red squiggly line even though it works)
+
+1. Finally we can add some rudimentary styling and a delete button to the appropriate areas. 
+
+The main list on App.vue gets some styling to make it scrollable, and the component itself gets some styling to give it a border and a general layout. There is also a reset in the main css file in `assets` folder. All this is just temporary placeholder styling to make the development process a bit nicer.

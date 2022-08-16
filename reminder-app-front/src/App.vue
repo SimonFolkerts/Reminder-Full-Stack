@@ -31,7 +31,7 @@
     </div>
     <button @click="getReminders" type="button">Get Reminders</button>
     <section class="reminder-list">
-      <ReminderListItem v-for="reminder of remindersArray" />
+      <ReminderListItem v-for="reminder of remindersArray" :reminder-data="reminder" />
     </section>
   </main>
 
@@ -82,4 +82,21 @@ export default {
 </script>
 
 <style scoped>
+main {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  height: 100vh;
+
+  overflow-y: hidden;
+}
+
+.reminder-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  overflow-y: scroll;
+}
 </style>
