@@ -166,3 +166,15 @@ Now that we have the ability to add reminders to the JSON file it makes sense to
 1. Modify the `getReminders()` method so that rather than console.logging the data, it saves it to the `reminderArray` property
 
 Now the client and server are able to work together to allow the creation and viewing of reminders. This is a sensoble place to start as now we can set up a better view for the reminders using components, and we can also add validation if we like. Once we have the reminders being rendered properly we can add a button that triggers the deletion of the reminder.
+
+## Step 9: Create components to represent the reminders on the front end
+
+Now that we are able to get a list of reminders rendered into the DOM it would make sense to spend some time to create a component to represent them, as we will want to add a way to delete reminders by cliking a button on each one. Having some form of interface will make this process a bit nicer. This doesn't have to be final styling, jsut enough to add a bit of convenience to the application development process.
+
+1. We will need to create a new component in the components folder (or wherever you are keeping your components, the folder structure is arbitrary). It is best practice to use two+ word component names using PascalCase. We can call it ReminderListItem.vue
+
+1. We can add a basic component boilerplate to it so that it is able to be imported and rendered. Let's put a simple h1 into the template so we can see it show up.
+
+1. Import the component into App.vue and register and render it. When rendering it, use `v-for` to display it once for each item in the reminders array.
+
+Now when you click you then get reminders button you can see each reminder gets a component that displays its hardcorded html. In the next step we will add the ability for each component instance to display the actual data that it represents.
