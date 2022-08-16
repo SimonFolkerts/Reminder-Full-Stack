@@ -4,8 +4,10 @@
       <p class="task">{{ reminderData.task }}</p>
       <p class="time">Date: {{ reminderData.time }}</p>
       <p class="priority">Priority: {{ priorities[reminderData.priority] }}</p>
+      {{ reminderData.id }}
     </div>
-    <button type="button">Clear</button>
+    <!-- on click emit a custom event named deleteReminder, with the reminder id attached as a payload -->
+    <button @click="$emit('deleteReminder', reminderData.id)" type="button">Clear</button>
   </div>
 </template>
 

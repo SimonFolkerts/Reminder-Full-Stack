@@ -2,17 +2,14 @@
   <main>
     <div>
       <form>
-        <!-- task input -->
         <div class="form-group">
           <label for="task">Reminder</label>
           <textarea v-model="task" id="task" cols="30" rows="2"></textarea>
         </div>
-        <!-- datepicker input -->
         <div class="form-group">
           <label for="time">Time/Date</label>
           <input v-model="time" id="time" type="datetime-local">
         </div>
-        <!-- priority select -->
         <div class="form-group">
           <label for="priority">Priority</label>
           <select v-model="priority" id="priority">
@@ -21,7 +18,6 @@
             <option value="2">High</option>
           </select>
         </div>
-        <!-- color picker input -->
         <div class="form-group">
           <label for="color">Colour</label>
           <input v-model="color" id="color" type="color">
@@ -31,7 +27,9 @@
     </div>
     <button @click="getReminders" type="button">Get Reminders</button>
     <section class="reminder-list">
-      <ReminderListItem v-for="reminder of remindersArray" :reminder-data="reminder" />
+      <!-- add event listener to the components that trigger the deleteReminder() method -->
+      <ReminderListItem @delete-reminder="deleteReminder" v-for="reminder of remindersArray"
+        :reminder-data="reminder" />
     </section>
   </main>
 
@@ -45,7 +43,6 @@ export default {
   },
   data() {
     return {
-      // properties that are linked to each of the above inputs
       task: 'Write your reminder here',
       time: null,
       priority: 2,
@@ -57,9 +54,7 @@ export default {
   methods: {
     async submitForm() {
       const response = await fetch('http://127.0.0.1:3000/reminders', {
-        // http method
         method: 'POST',
-        // content
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           task: this.task,
@@ -76,6 +71,18 @@ export default {
       const response = await fetch('http://127.0.0.1:3000/reminders');
       const data = await response.json()
       this.remindersArray = data;
+    },
+
+    // this method is the handler for the delete-reminder event. It gets given delete-reminders payload, the id
+    async deleteReminder(id) {
+      // send delete request
+      const response = await fetch(`http://127.0.0.1:3000/reminders/${id}`, {
+        method: 'DELETE',
+      });
+      // interpret response as text
+      const data = await response.text();
+      // console.log the response text
+      console.log(data);
     }
   }
 }

@@ -1,1 +1,46 @@
-{"reminders":[{"task":"Write your reminder here","time":null,"priority":2,"color":null},{"task":"Write your reminder here","time":null,"priority":2,"color":null},{"task":"Write your reminder here","time":null,"priority":2,"color":null},{"task":"Write your reminder here","time":null,"priority":2,"color":null},{"task":"Hello I am a reminder","time":"2022-08-16","priority":"0","color":"#ff0000"},{"task":"asdlfkas;dfjka;sdlkfja","time":null,"priority":2,"color":"#FFFFFF"},{"task":"asdlfkas;dfjka;sdlkfja","time":null,"priority":2,"color":"#FFFFFF"},{"task":"AAAAAAAAAAAAAAAAAAAAAAA","time":"2022-08-16T17:00","priority":"1","color":"#ff0000"},{"task":"Write your reminder here","time":null,"priority":2,"color":"#00ff11"},{"task":"Please remember to remind yourself to recall the important thing that you were supposed to do","time":"2022-08-11T15:00","priority":"1","color":"#0091ff"},{"task":"Write your reminder here","time":null,"priority":2,"color":"#FFFFFF"}]}
+{
+  "reminders": [
+    {
+      "task": "New reminder",
+      "time": "2022-08-17T18:30",
+      "priority": "1",
+      "color": "#ff0000",
+      "id": "bfaed882-970c-460a-9e9d-47d02fd3acc0"
+    },
+    {
+      "task": "New reminder",
+      "time": "2022-08-17T18:30",
+      "priority": "1",
+      "color": "#ff0000",
+      "id": "b019efb6-3db4-4d19-a4db-b0baabf64230"
+    },
+    {
+      "task": "New reminder",
+      "time": "2022-08-17T18:30",
+      "priority": "1",
+      "color": "#ff0000",
+      "id": "3f50189b-2142-492d-8c2c-4a60ec88c8ff"
+    },
+    {
+      "task": "New reminder",
+      "time": "2022-08-17T18:30",
+      "priority": "1",
+      "color": "#ff0000",
+      "id": "182e6707-72ca-4f48-a5f7-61162a5160bc"
+    },
+    {
+      "task": "New reminder",
+      "time": "2022-08-17T18:30",
+      "priority": "1",
+      "color": "#ff0000",
+      "id": "f085e082-a56c-4f45-a47f-27d106a21947"
+    },
+    {
+      "task": "Write your reminder here",
+      "time": null,
+      "priority": 2,
+      "color": "#FFFFFF",
+      "id": "5eb593cb-a7de-4038-a704-7a21336bb7f3"
+    }
+  ]
+}

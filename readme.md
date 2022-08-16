@@ -196,3 +196,37 @@ We will now add the ability for the parent component to pass through to the remi
 1. Finally we can add some rudimentary styling and a delete button to the appropriate areas. 
 
 The main list on App.vue gets some styling to make it scrollable, and the component itself gets some styling to give it a border and a general layout. There is also a reset in the main css file in `assets` folder. All this is just temporary placeholder styling to make the development process a bit nicer.
+
+## Step 11: Delete functionality
+
+We can now cause the clicking of the the delete button to trigger the deletion of a specific reminder on the back end. By emitting an event from the component that was clicked on, we can cause the parent App.vue to send a DELETE request to the API to remove the given element from the array. First we need to add an ID to the created reminders before they are saved.
+
+1. We need to be able to ID our reminders somehow so we know whic one to remove from the array on the server. We can achieve this by adding an id property to the reminder objects before we save them to the database.
+
+1. We can get unique IDs using a package called `uuid`. By installing it using `npm install uuid` on the server, we can the import it in the js using require like this:
+ `const { v4: uuidv4 } = require("uuid");`
+
+ 1. Just before we save the req.body, we can access it and add an id property with the value set to the result of running  `uuidv4()`, like this: `req.body.id = uuidv4();`. This way, any req.body that is saved into the database gets a unique id.
+
+ 1. Delete the old reminders without ids, and create some new ones.
+
+ 1. Now we can move to the front end, into the reminder list item component. We can add an event listener to the Clear button that emits a custom event with the id as a payload.
+
+ 1. On the parent App.vue, add an event listener that reacts to the delete event and calls a method. Any payloads on the event will be sent to that method as arguments automatically.
+
+ 1. Define a new method in App.vue called deleteReminder with a paramenter to hold the incoming id from the delete event. This method will send a DELETE request to the server with the id value appended to the URL as a URL parameter. The response will be interpreted as text and console.logged.
+
+ 1. On the server create a new endpoint that handles DELETE requests to `/reminders/:id` (it has a dynamic URL segment that we can access using req.params.id, so whatever is in the request url after /reminders/ gets put into this property).
+
+ 1. Set the endpoint up to just send back some text at this point, and in the next step we will add functionality to remove the correct item from the json file.
+
+ ### IMPORTANT!
+  We also need to modify the package.json on the server file to tell nodemon not to restart when the json file is modified. Since when we save new posts the json file's contents change, nodemon restarts the server every time. This is undesirable. In the package.json file, add the following after the dev dependencies section:
+ ```
+ "nodemonConfig": {
+    "ignore": [
+      "data.json"
+    ]
+  }
+  ```
+  This will prevent the server from refreshing immediately after writing a new reminder to the json file. 
