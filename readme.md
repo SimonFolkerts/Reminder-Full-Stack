@@ -250,6 +250,17 @@ This creates a copy of the data.reminders array which we can then use to overrit
 
 1. Finally on the front end we can tidy things up a bit by removing the get reminders button and adding the `getReminders()` method to the post and delete methods, as well as the `mounted()` lifecycle hook. This means that the reminders will be fetched after posting, deleting, and when the component loads/is mounted.
 
+## Step 13: Splice instead of filter
+
+We could also use splice, which would be a bit safer in case we mess up the filter test functions conditional. Splice can only delete however many reminders are set by the deletecount argument, which should just be one. Filter, if through oversight is misconfigured, could not get any matches and then delete the entire database.
+
+1. To use splice, we first need to find the index of the reminder in the arrray that should be deleted. We can use `array.findIndex()` for that.
+
+1. `findIndex()` takes a test function, where we can test if the currently iterated reminder (which is passed as an argument to a parameter in the test function definition) has an id property that matches the `req.params.id` value. If it returns true, the index of that particular reminder is returned.
+
+1. We can use this index as the start position of the splice operation on the `data.reminders` array, with a delete count set to 1. This will remove a single object from the array, at the index of the object whose id is set for deletion.
+
+
 
 
 
