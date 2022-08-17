@@ -230,3 +230,28 @@ We can now cause the clicking of the the delete button to trigger the deletion o
   }
   ```
   This will prevent the server from refreshing immediately after writing a new reminder to the json file. 
+
+## Step 12: Delete functionality
+Now that we have everything set up, we can add the delete functionality. What we want to do is to read the data, decode it, and then modify the array by removing the item in the array that has an id that matches the one sent as a URL parameter by the client. Then we want to re encode the data and save it.
+
+There are several ways to modify the array by removing an element, foremost of which are `.filter()` and `.splice()`. Filter will require us to replace the existing array with the filtered one, as filter creates a copy, whereas with splice we will need to find the index of the match first. Either way works.
+
+1. On the delete endpoint on the backend, we can add the code that we've used so far to read and decode the data from the data.json file.
+
+1. Once the data is decoded, we can run a filter on the array in the data like this: 
+```
+const filteredRemindersArray = data.reminders.filter((reminder) => {
+  return reminder.id != req.params.id;
+})
+```
+This creates a copy of the data.reminders array which we can then use to overrite the original: `data.reminders = filteredRemindersArray`
+
+1. Now we just re-encode and save the data object back into the json.file.
+
+1. Finally on the front end we can tidy things up a bit by removing the get reminders button and adding the `getReminders()` method to the post and delete methods, as well as the `mounted()` lifecycle hook. This means that the reminders will be fetched after posting, deleting, and when the component loads/is mounted.
+
+
+
+
+
+

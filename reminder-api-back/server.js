@@ -1,9 +1,6 @@
 const express = require("express");
 const cors = require("cors");
 const fs = require("fs");
-
-// NEW! Add this package with npm install uuid
-// it allows the generation of unique id strings
 const { v4: uuidv4 } = require("uuid");
 
 const app = express();
@@ -27,9 +24,7 @@ app.post("/reminders", (req, res) => {
   const rawData = fs.readFileSync("./data/data.json");
   const data = JSON.parse(rawData);
   // modify
-  // NEW! This adds an id property to the payload that was sent in the request. The value is set to what the uuidv4() function returns, which is a long unique string that we will use as the id. This id is needed so that when we delete a reminder we can identify which one to remove from the array.
   req.body.id = uuidv4();
-  // after an id is added to the new reminder object, we add it to the reminders array and resave it to the file.
   data.reminders.push(req.body);
   // write
   const newJson = JSON.stringify(data);
@@ -42,6 +37,23 @@ app.post("/reminders", (req, res) => {
 app.delete("/reminders/:id", (req, res) => {
   // we can access whatever was in the url where :id is, right after reminder, by access request.params
   console.log(req.params.id);
+
+  // #### remove the element from the array whose id matches the url parameter
+  // read and decode into js
+  const rawData = fs.readFileSync("./data/data.json");
+  const data = JSON.parse(rawData);
+
+  // filter the data.reminders array, creating a shallow copy that only has all the reminders except the on to be deleted
+  const filteredRemindersArray = data.reminders.filter((reminder) => {
+    return reminder.id != req.params.id;
+  });
+
+  // overwrite the original data.reminders array with the copy that is missing the deleted reminder
+  data.reminders = filteredRemindersArray;
+
+  // now we can save the modified data back into the json file.
+  const newJson = JSON.stringify(data);
+  fs.writeFileSync("./data/data.json", newJson);
 
   // send back a string that says "deleted: <id of deleted reminder>"
   res.send("deleted: " + req.params.id);

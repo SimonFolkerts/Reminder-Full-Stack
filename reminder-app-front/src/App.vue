@@ -25,10 +25,8 @@
         <button @click="submitForm" type="button">Create Reminder</button>
       </form>
     </div>
-    <button @click="getReminders" type="button">Get Reminders</button>
     <section class="reminder-list">
-      <!-- add event listener to the components that trigger the deleteReminder() method -->
-      <ReminderListItem @delete-reminder="deleteReminder" v-for="reminder of remindersArray"
+      <ReminderListItem @delete-reminder="deleteReminder" v-for="reminder of remindersArray" :key="reminder.id"
         :reminder-data="reminder" />
     </section>
   </main>
@@ -66,6 +64,7 @@ export default {
 
       const data = await response.json();
       console.log(data);
+      this.getReminders();
     },
     async getReminders() {
       const response = await fetch('http://127.0.0.1:3000/reminders');
@@ -83,7 +82,12 @@ export default {
       const data = await response.text();
       // console.log the response text
       console.log(data);
+
+      this.getReminders();
     }
+  },
+  mounted() {
+    this.getReminders();
   }
 }
 </script>
